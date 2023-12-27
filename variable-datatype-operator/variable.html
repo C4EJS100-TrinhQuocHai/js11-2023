@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        3 cách khai báo biến
+        1.var :
+        -Có  thể khai báo lại
+        -Có thể gán lại giá trị
+        -Có hoisting và truy cập được
+         +hoisting là như thế nào:
+          đưa việc khai báo lên đầu.
+        -phạm vi hoạt động : function
+        2.let
+        -có thể gán lại giá trị không thể khai báo lại
+        -có hoisting nhưng không truy cập được
+        -Phạm vi hoạt động block-scope
+        3.const
+        -thường dùng để khai báo hằng số (đối với primitive)
+        -không thể khai báo lại,không thể gán lại giá trị
+        -khi khai báo phải gán giá trị (nếu không sẽ báo lỗi);
+
+        -tham trị :  lưu trữ ở stack (vùng nhớ tĩnh);
+         +kiểu dữ liệu đơn giản : bản chấp sao chép giá trị gán cho thằng khác
+        -tham chiếu: lưu trữ ở heap (vùng nhớ động);
+         +kiểu dữ liệu phức tạp : bản chất sao chép địa chỉ ô nhớ gán cho thằng khác
+          Tức là 2 thằng cùng trỏ về 1 cái địa chỉ.
+        *********************************
+        Quy tắc đặt tên biến:
+        -camel-case :
+        -không được bắt đầu bằng số,chữ cái đặc biệt trừ (_,$)
+        -tránh các từ khoá đặc biệt trong JS. (class,try,catch....)
+
+     -->
+     <script>
+        
+        // var a=9;
+        // var a=15;
+        // a=16;
+        console.log(a);
+         a=5;
+
+        //  console.log(b);
+        //  let b=5;
+        let c=100;
+         if(true){
+            var k=1;
+            {
+                {
+                    {
+                        console.log("111111111",c);
+                    }
+                }
+            }
+         }
+         console.log(c);
+         console.log(k);
+         function test() {
+            var name="hoa";
+         }
+         console.log(name);
+
+         let a1=3;
+         let a2=a1;
+         a1=100;
+         console.log("22222222",a2);// không thay đổi
+         let stu1={
+            name:"hồng"
+         }
+         let stu2=stu1;
+         stu1.name="sen";
+         console.log("3333333333333333",stu2);// thay đổi theo
+
+       const student={
+        name:"hoa",
+       }
+       student.name="minh";
+       console.log(student);
+     </script>
+</body>
+</html>

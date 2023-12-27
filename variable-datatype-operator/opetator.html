@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Toán tử :
+        1.Toán tử số học
+        +,-,*,/,%,**
+        2.Toán tử logic
+        OR(||),AND(&&)
+        || : sẽ lấy truthy đầu tiên còn không có thì lấy thằng cuối cùng
+        && lấy falsy đầu tiên không có lấy thằng cuối cùng
+        3.Toán tử so sánh
+         >,<,>=,<=,==,===,!=,!==
+         == so sánh giá trị
+         === so sáng kiểu dữ liệu và giá trị
+         != : khác giá trị
+         !==: khác giá trị hoặc kiểu dữ liệu
+        4.Toán tử 3 ngôi ? :
+        5.Toán tử nullish
+        -Nếu null or undefined thì không lấy
+        falsy: null,undefined,0,false,NaN,"",''
+        truthy: không phải là falsy
+        6.Toán tử tăng giảm
+        ++,--
+        ++a: tiền tố : cộng trước
+        a++: hậu tố :  cộng sau
+        7.Toán tử gán : =;+=;-=
+
+        -String+ number = string
+        -string+string= string
+        +number + string=string
+
+     -->
+     <script>
+        let result= 5+6+true;
+        console.log(result);
+        let n=5;
+         n+=7;
+        console.log(n);
+        console.log(2222222222222,null||NaN||undefined);
+        if("hoa"){
+            console.log("hello");
+        }
+        console.log(5%6);
+        console.log(5 =="5");  //  true
+        console.log(5 === "5");//  false
+        console.log(5 != "5"); //  false
+        console.log(5 !== "5");//  true
+        console.log(5>3?console.log("111"):console.log("22222"));
+        // let result= localStorage.getItem("lâm")??[];
+        // console.log(result);
+        // for (let i = 0; i < result.length; i++) {
+        //     console.log("11111");
+        // }
+        // console.log("9999999");
+        
+     </script>
+</body>
+</html>

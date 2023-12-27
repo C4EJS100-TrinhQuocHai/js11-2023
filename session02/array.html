@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        Array: Mảng
+        reference type ( kiểm tham chiếu-kiểu phức tạp)
+        có 2 cách khai báo
+            C1: let students=["hoa","bình"]
+            C2: let students=new Array("hoa","binh);
+        Các thuộc tính cơ bản của mảng
+            1.length : chính là độ dài của mảng hay là số phần tử trong mảng
+            2.mảng đánh chỉ mục index từ 0
+            3.cách truy xuất các phần tử 
+             tên_mảng[index]
+        CRUD với mảng
+        C: CREATE -Thêm,tạo mới phần tử
+            1.push(): thêm phần tử vào vị trí cuối mảng
+            2.unshift():thêm vào đầu mảng
+            3.splice()
+                -Nhận vào 3 giá trị
+                1.vị trí
+                2.số phần muốn xoá
+                3.thêm vào vị trí vừa xoá
+        R: READ -Đọc in ra
+            -Dùng for-thường
+            -for-in trả về index
+            -for-off trả về giá trị
+        U: UPDATE -cập nhật
+            C1: update theo index
+            C2: Dùng splice
+        D:DELETE-xoá
+            1.pop() xoá cuối
+            2.shift() :xoá đầu
+            3.muốn xoá theo vị trí splice
+
+        ********************************
+        Các phương thức làm việc với mảng
+        1.map(): duyệt các phần tử trong mảng
+        -trả về 1 mảng mới độ dài bằng độ dài ban đầu
+        2.filter():
+        -Cũng trả về 1 mảng mớI
+        -Lọc theo  điều kiện nếu thoã mãn trả về mảng gồm các giá trị thoã mãn
+        -Nếu không thoã mãn trả về mảng rỗng
+
+        3.foreach():
+        -Không tạo ra mảng mới
+        -không nhận return
+        4.some(): 1 phần tử thoã mãn 
+        5.every(): tất cả thoã mãn
+        6.concat():gộp mảng
+        7.find(): tìm kiếm phần tử trong mảng thoã mãn điều kiện
+        -Nếu đúng trả về phần tử
+        -Nếu sai trả về undefined
+        8.findIndex(): tìm vị trí phần tử
+        -Nếu đúng trả về vị trí
+        -Nếu sai trả về -1
+        9.flat(): làm phẳng mảng
+        10.includes(): kiểm tra phần tử có  trong mảng hay không
+        -Nếu có trả về true
+        -Nếu không có trả về false
+        11.reduce. tính toán trả về kết quả
+        -Nhận 2 tham số
+            1.callback-function
+            2.initial
+     -->
+    <script>
+        // let students=["hoa","hồng","minh"];
+        // let result= students.find((a)=>{
+        //         return a=="hồng1"
+        // })
+        // let array=[[2],[1,[5]],"hải cần"];
+        // console.log(array.flat());
+        // console.log(result);
+        // // students[1]="bình gold";
+        // students.splice(1,1,"bình gold");
+        // students.splice(1,1)
+        // console.log(students);
+        // let students = [];
+        // students.push("bình gas");
+        // students.unshift("lan");
+        // //["lan","bình gas"];
+        // students.splice(1, 0, "hồng")
+        // //["lan","hồng","bình gas"];
+        // students.splice(2, 0, "Minh");
+
+        // for (let i = 0; i < students.length; i++) {
+        //     console.log("student", students[i]);
+        // }
+        // for (const lam in students) {
+        //     console.log("lam", students[lam]);
+        // }
+        // for (const lam of students) {
+        //     console.log(lam);
+        // }
+        // let numbers=[0,1,2,5,6,4];
+        // let products=[
+        //     {
+        //         name:"iphone11",
+        //         price:5000,
+        //         quantity:5
+        //     },
+        //      {
+        //         name: "iphone15",
+        //         price: 15000,
+        //         quantity:2
+        //     }
+        // ]
+        // let sum=0;
+        // for(let i=0;i<products.length;i++){
+        //     sum+=products[i].price*products[i].quantity;
+        // }
+        // console.log(sum);
+
+        // let result= products.reduce((accumulator,indexValue)=>{
+        //     return accumulator+indexValue.price*indexValue.quantity;
+        // },0)
+        // console.log(result);
+        
+        // let numbers=[1,2,5,8,7];
+        // numbers.forEach(function hello(a,b,c) {
+        //      numbers[b]=a*2
+
+        // })
+        // console.log(numbers);
+      /* 
+      Bài 1: sắp xếp các phần tử trong mảng theo chiều từ bé đến lớn
+             không dùng sort
+            -selection sort 
+            -bubble sort
+            -merge sort
+            -quick sort
+            -...........
+      Bài 2: xoá các phần tử trùng nhau trong mảng
+          input [1,1,5,4,1,1,5,4,1];
+          output [1,5,4];
+      Bài 3: cắt chuỗi dài nhất
+       input:abca
+       output: abc
+
+       input : abcaef
+       output: bcaef  
+
+       input : aaaa
+       output: a
+
+       input : abcdcbdefcba
+       output: defcba
+S
+       */
+
+       
+    </script>
+</body>
+
+</html>

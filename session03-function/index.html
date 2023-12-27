@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+           
+        }
+        .form-edit{
+            position: absolute;
+            top: 150px;
+            right: 400px;
+             border: 1px solid black;
+             width: 500px;
+             height: 180px;
+             margin: 10px auto;
+             display: flex;
+             flex-direction: column;
+             gap: 10px;
+             display: none;
+        }
+        .form-edit .close-edit{
+            position: absolute;
+            right: 10px;
+            top: 2px;
+        }
+        input{
+            border: 1px solid black;
+            outline: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+         .form-edit button{
+            padding: 5px;
+        }
+        table,tr,td{
+            text-align: center;
+            padding: 2px;
+        }
+        td{
+            width: 150px;
+        }
+        .status{
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- tạo form để sửa công việc -->
+    <div class="form-edit" >
+        <label for="" class="close-edit" onclick="closeForm()">X</label>
+        <label for="">Tên Công Việc</label>
+        <input type="text" id="editJob"> <br>
+        <label for="">Trạng thái công việc</label>
+        <div>
+            <input type="radio" checked name="select-job">Chưa hoàn thành
+            <input type="radio" name="select-job">Hoàn thành
+        </div>
+        <button onclick="saveEdit()">save</button>
+    </div>
+    <input style="margin: 10px;" type="text" id="job" />
+    <button onclick="addTodo()">add</button> <br>
+    <!-- tìm kiếm công việc -->
+     <input type="text" oninput="searchByName()" id="search" placeholder="nhập tìm kiếm theo tên công việc">
+    <!-- nơi để hiển thị job -->
+    <table border="1" cellpadding="15">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>TÊN</th>
+                <th>NGÀY TẠO</th>
+                <th>TRẠNG THÁI</th>
+                <th colspan="2">ACTION</th>
+            </tr>
+        </thead>
+        <tbody id="body">
+            <!-- <tr>
+                <td>1</td>
+                <td>đá bóng</td>
+                <td>12/27/2023</td>
+                <td>chưa hoàn thành</td>
+            </tr> -->
+        </tbody>
+    </table>
+ 
+    <script>
+        // tạo mảng chứa danh sách công việc
+        let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+        // function sinh id ngẫu nhiên
+        function uuid() {
+            return Math.floor(
+                Math.random() * 9999999999 + new Date().getMilliseconds()
+            );
+        }
+        //function thêm công việc
+        function addTodo() {
+            // lấy thông tin công việc
+            let job = document.getElementById("job").value;
+            // 1 công việc gồm
+            /* 
+            id: công việc
+            tên công việc
+            trạng thái hoàn thành
+            thời gian tạo công việc
+         */
+            let jobInfo = {
+                name: job,
+                id: uuid(),
+                createdAt: new Date().getDate(),
+                status: false,
+            };
+            jobs.push(jobInfo);
+            //sau khi thêm vào rồi đi lưu lại
+            localStorage.setItem("jobs", JSON.stringify(jobs));
+            // sau khi thêm xong đưa field nhập về rỗng.
+            document.getElementById("job").value = "";
+            // khi thêm xong gọi nó ra để hiển thị danh sách công việc
+
+            renderJobs(jobs);
+        }
+        //function hiển thị công việc
+
+        function renderJobs(jobs) {
+            let text = "";
+            let check = "";
+            let lineThrough="";
+             let input="";
+            for (let i = 0; i < jobs.length; i++) {
+               
+                if (jobs[i].status) {
+                    check = "đã hoàn thành";
+                    input= `    <input type="checkbox" checked onclick=chooseStatus(${ jobs[i].id })>`;
+                    lineThrough="line-through";
+                } else {
+                    check = "chưa hoàn thành";
+                    lineThrough = "";
+                    input = `<input type="checkbox" onclick=chooseStatus(${jobs[i].id})>`
+                }
+                text += `
+                            <tr>
+                                <td>${i + 1}</td>
+                                <td style=text-decoration:${lineThrough}>${jobs[i].name}</td>
+                                <td>${jobs[i].createdAt}</td>
+                                <td class="status">
+                                    ${check}
+                                    ${input}
+                                </td>
+                                <td>
+                                     <button onclick=editJob(${jobs[i].id})>
+                                        edit
+                                    </button>
+
+                                </td>
+                              <td>
+                                     <button onclick=deleteJob(${jobs[i].id})>
+                                        delete
+                                    </button>
+                              </td>
+                            </tr>
+                        `;
+            }
+            document.getElementById("body").innerHTML = text;
+        }
+        renderJobs(jobs);
+        //function update công việc
+        let infoEdit;
+        function editJob(jobId) {
+            document.getElementsByClassName("form-edit")[0].style.display="flex";
+            for (let i = 0; i < jobs.length; i++) {
+                    if(jobs[i].id==jobId){
+                        console.log(jobs[i]);
+                        infoEdit=jobs[i]
+                        document.getElementById("editJob").value=jobs[i].name;
+                    }
+                
+            }
+        }
+        //function xoá công việc
+        function deleteJob(idNe) {
+            console.log("click xem ăn hàm hay chưa!", idNe);
+            // xoá theo id
+            // xoá phần tử theo idNe
+            let access = confirm("bạn cúa muốn xoá hay không?");
+            if (!access) return;
+            for (let i = 0; i < jobs.length; i++) {
+                if (jobs[i].id == idNe) {
+                    jobs.splice(i, 1);
+                    // sau khi xoá xong phải lưu trên local
+                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                    // sau khi lưu xong gọi hàm render
+                    renderJobs(jobs);
+                }
+            }
+        }
+        // function đóng form lại
+        function closeForm() {
+             document.getElementsByClassName("form-edit")[0].style.display = "none";
+        }
+        // function lưu chỉnh sửa
+        function saveEdit() {
+            // lấy giá trị ô input khi người dùng chỉnh sửa
+            let inputEdit=document.getElementById("editJob").value;
+            // tìm  vị trí xem thằng có id đó ở vị trí lào
+            for (let i = 0; i < jobs.length; i++) {
+                if(jobs[i].id== infoEdit.id){
+                    let valueEdit={...infoEdit,name:inputEdit};
+                    jobs.splice(i,1,valueEdit);
+                    //sau khi xoá xong nàm gì
+                    // lưu lên local
+                    localStorage.setItem("jobs",JSON.stringify(jobs));
+                    closeForm();
+                    //gọi lại hàm reder
+                    renderJobs(jobs);
+                }
+            }
+        }
+        // function cập nhật trạng thái công việc
+        function chooseStatus(id) {
+             for (let i = 0; i < jobs.length; i++) {
+                if (jobs[i].id == id) {
+                    jobs[i].status=!jobs[i].status;
+                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                    
+                }
+            }
+        }
+        /* fucntion tìm kiếm công việc */
+        function searchByName() {
+            //bước 1: lấy giá trị ô input người dùng nhập
+            let searchValue=document.getElementById("search").value;
+            // console.log("1111",searchValue);
+              let result= jobs.filter((item,index)=>{
+                return item.name.indexOf(searchValue)!=-1
+            })
+            console.log("555555555",result);
+            renderJobs(result)
+            // gọi hàm render
+            //bước 2: duyệt trong mảng danh sách công việc xem 
+            // có tên công việc nào thoã mãn
+        }
+        // let books=[
+        //     {
+        //         title:"học lập trình ",
+        //         id:11,
+        //     },
+        //     {
+        //         title: "bạn lài giỏi tôi cũng thế",
+        //         id: 12
+        //     },
+        //      {
+        //         title: "đắc nhân tâm",
+        //         id: 13
+        //     }
+        // ]
+        // // let result=[];
+        // let text="m"
+        // // for (let i = 0; i < books.length; i++) {
+          
+        // //     if(books[i].title.indexOf(text)!=-1){
+        // //         result.push(books[i])
+        // //     }
+        // // }
+        // // console.log(result);
+        // let result= books.filter((item,index)=>{
+        //     return item.title.indexOf(text)!=-1
+        // })
+        // console.log(result);
+    </script>
+</body>
+
+</html>

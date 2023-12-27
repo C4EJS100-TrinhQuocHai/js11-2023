@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Các phương thức làm việc với string
+        1.split : chuyển chuỗi thành mảng
+        2.join(): để chuyển mảng thành chuỗi
+        3.toUpperCase(): chuyển chữ in thường sang chữ in hoa
+        4.toLowerCase(): chuyển chữ in hoa sang dạng in thường
+        5.slice      (start,end): sao chép,cắt
+     -->
+     <script>
+        let name="hùng111fdfbdhfh";
+        // console.log(name.charAt(1));
+        console.log(name.slice(1));
+       let fullName="vũ hồng vân";
+       console.log("slice",fullName.slice(0,2));
+       console.log(fullName.split());
+       let students=["hoa","hồng","lan","ánh"];
+       console.log(students.join("**"));
+       /* 
+        Viết chương trình cho người dùng nhập tên đầy đủ 1 người theo dấu cách
+        in ra tên người đó với chữ cái đầu viết hoa
+        input:vũ hồng vân
+        output: Vũ Hồng Vân
+        
+        Viết chương trình cho người dùng nhập tên đầy đủ 1 người theo dấu cách
+        Nếu gặp chữ hoa chuyển xuống chữ thường
+        Nếu gặp chữ thường lên hoa
+        in ra tên người đó.
+
+        input:vũ Hồng vÂn
+        output: VŨ hỒNG VâN
+        Nhập text bất kì in ra đoạn có độ dài lớn nhất các phần tử không trùng nhau
+        INPUT: abcb
+        OUTPUT: abc
+        INPUT: abcbgha
+        OUTPUT: cbgha
+        */
+
+        
+     </script>
+</body>
+</html>
