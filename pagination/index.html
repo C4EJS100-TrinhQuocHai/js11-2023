@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .page-list{
+            display: flex;
+            list-style: none;
+            text-align: center;
+            line-height: 50px;
+            gap: 10px;
+            width: 500px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+        .page-list li{
+            width: 50px;
+            height: 50px;
+            border: 1px solid violet;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <ul class="number-list">
+        
+        
+    </ul>
+    <ul class="page-list">
+        
+    </ul>
+    <script>
+        let numbers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+        let pageSize=4;// số sản phẩm trên 1 trang
+        let totalPage=Math.ceil(numbers.length/pageSize);
+        let currentPage=1;// trang hiện tại
+        let start;
+        let end;
+        /* function tính toán start và end */
+        function startEnd(currPage) {
+            start=(currPage-1)*pageSize;
+            end=currPage*pageSize;
+        }
+        startEnd(1)
+        /* function hiển thị các số */
+        function renderNumbers() {
+            let text="";
+            for (let i = 0; i < numbers.length; i++) {
+                if(i>=start&&i<end){
+                     text += `<li>${numbers[i]}</li>`
+                }
+            }
+             document.getElementsByClassName("number-list")[0].innerHTML = text
+        }
+        renderNumbers()
+        /* fucntion hiển thị số trang */
+        function pages() {
+            let text="";
+            for (let i = 0; i < totalPage; i++) {
+                text+=` <li onclick=choosePage(${i})>${i+1}</li>`
+                
+            }
+            document.getElementsByClassName("page-list")[0].innerHTML=text
+        }
+        pages();
+        //function chọn currentPage;
+        function choosePage(nowPage) {
+            console.log("111111", nowPage);
+            startEnd(nowPage+1);
+            renderNumbers();
+        }
+
+    </script>
+</body>
+</html>
